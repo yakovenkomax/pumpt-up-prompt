@@ -60,7 +60,7 @@ generate_prompt() {
     dir_part=$FG_BLACK$BG_BLUE' \w '
 
     # Git repo
-    GIT_PROMPT=$(__git_ps1)
+    GIT_PROMPT=$(__git_ps1 ' %s')
     if [[ -n $GIT_PROMPT ]]; then
         git_part=$FG_BLUE$BG_YELLOW$SYM_SEPARATOR$FG_BLACK$BG_YELLOW' '$SYM_BRANCH$GIT_PROMPT' '
     else
