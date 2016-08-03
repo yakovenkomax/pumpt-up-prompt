@@ -2,28 +2,10 @@
 export LANG="UTF-8"
 export LESSCHARSET=utf-8
 
-# Git completion and prompt plugins:
+# Git prompt plugin:
 # https://github.com/git/git/tree/master/contrib/completion
-source ~/.git-completion.bash
 source ~/.git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=1
-
-# Aliases
-alias rm='rm -i'
-alias ls='ls -GFha1'
-alias mkdir='mkdir -pv'
-alias gst='git status'
-alias gb='git branch'
-alias gco='git checkout'
-alias gcb='git checkout -b'
-alias gaa='git add .'
-alias gc='git commit'
-alias 'gc!'='git commit --amend -m ""'
-alias glog='git log --graph --color --decorate --oneline'
-alias grup='git remote update'
-alias grom='git rebase origin/master'
-alias gsu='git submodule init;git submodule sync;git submodule update'
-alias gwipe='git clean -df;git checkout -- .'
 
 # Prompt colors
 FG_BLACK='\[\e[0;30m\]'
