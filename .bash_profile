@@ -1,9 +1,13 @@
+# Add aliases if present
+[[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
+
 # Charset global fixes
 export LANG="UTF-8"
 export LESSCHARSET=utf-8
 
-# Git prompt plugin:
+# Git completion and prompt plugins:
 # https://github.com/git/git/tree/master/contrib/completion
+source ~/.git-completion.bash
 source ~/.git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=1
 
