@@ -42,6 +42,14 @@ SYM_SEPARATOR=''
 
 # Prompt line generation
 generate_prompt() {
+    # is virtual environment activated?
+    if [[ -n $VIRTUAL_ENV ]]; then
+       ve_part=`basename $VIRTUAL_ENV`
+       ve_part=$FG_WHITE$BG_MAGENTA$ve_part' '$FG_MAGENTA$BG_BLUE$SYM_SEPARATOR
+    else
+        ve_part=''
+    fi;
+    
     # Current directory
     dir_part=$FG_BLACK$BG_BLUE' \w '
 
@@ -60,6 +68,6 @@ generate_prompt() {
         end_part=$FG_BLUE$BG_DEFAULT$SYM_SEPARATOR$RESET' '
     fi
 
-    PS1=$dir_part$git_part$end_part
+    PS1=$ve_part$dir_part$git_part$end_part
 }
 PROMPT_COMMAND=generate_prompt
