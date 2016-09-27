@@ -80,14 +80,15 @@ generate_prompt() {
        virtualenv_part=$(basename $VIRTUAL_ENV)
     fi
 
-    # Filter enabled parts
+    # Filter enabled nonempty parts
     enabled_parts=""
     for i in ${!settings[@]}; do
         part=${settings[$i]}
         part_name=$part[@]
         part_settings=("${!part_name}")
+        part_value=${!part_settings[1]}
 
-        if [[ ${part_settings[0]} = true ]]; then
+        if [[ ${part_settings[0]} = true && -n $part_value ]]; then
             enabled_parts+=${settings[$i]}" "
         fi
     done
@@ -103,27 +104,23 @@ generate_prompt() {
         fg_color=${part_settings[2]}
         bg_color=${part_settings[3]}
 
-        # Check if part is empty
-        if [[ -n $part_value ]]; then
-            PS1+=$(fg $fg_color)$(bg $bg_color)" "$part_value" "
+        # Append part content
+        PS1+=$(fg $fg_color)$(bg $bg_color)" "$part_value" "
 
-            # Check if current part is last
-            if [[ $(($i + 1)) < ${#enabled_parts[@]} ]]; then
-                next_part=${enabled_parts[$(($i + 1))]}
-                next_part_name=$next_part[@]
-                next_part_settings=("${!next_part_name}")
-                next_part_value=${!next_part_settings[1]}
-                # Check if next part is empty
-                if [[ -n $next_part_value ]]; then
-                    next_bg_color=${next_part_settings[3]}
-                fi
-            else
-                next_bg_color="default"
-            fi
-            PS1+=$(separator $bg_color $next_bg_color)
+        # Check if current part is last
+        if [[ $(($i + 1)) -lt ${#enabled_parts[@]} ]]; then
+            next_part=${enabled_parts[$(($i + 1))]}
+            next_part_name=$next_part[@]
+            next_part_settings=("${!next_part_name}")
+            next_bg_color=${next_part_settings[3]}
+        else
+            next_bg_color=default
         fi
+
+        # Append separator
+        PS1+=$(separator $bg_color $next_bg_color)
     done
     # Reset colors and add space in the end
-    PS1+=$(bg reset)" "
+    PS1+=$(fg reset)" "
 }
 PROMPT_COMMAND=generate_prompt
