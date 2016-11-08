@@ -16,6 +16,7 @@ GIT_PS1_SHOWDIRTYSTATE=1
 # https://github.com/abertsch/Menlo-for-Powerline
 SYM_BRANCH=""
 SYM_SEPARATOR=""
+SYM_SEPARATOR_THIN=""
 
 # Colors array
 colors=("black" "red" "green" "yellow" "blue" "magenta" "cyan" "white" "default" "reset")
@@ -53,7 +54,11 @@ separator() {
     if [[ $# -eq 1 ]]; then
         echo $(bg reset)$(fg $1)$SYM_SEPARATOR
     else
-        echo $(fg $1)$(bg $2)$SYM_SEPARATOR
+        if [[ "$1" == "$2" ]]; then
+            echo $(fg "black")$(bg $2)$SYM_SEPARATOR_THIN
+        else
+            echo $(fg $1)$(bg $2)$SYM_SEPARATOR
+        fi
     fi
 }
 
