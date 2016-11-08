@@ -50,10 +50,10 @@ get_index() {
 # Separator generation
 # Ex.: separator bg_color next_bg_color
 separator() {
-    if [[ -z "$2" ]]; then
+    if [[ $# -eq 1 ]]; then
         echo $(bg reset)$(fg $1)$SYM_SEPARATOR
     else
-        echo $(bg $1)$(fg $2)$SYM_SEPARATOR
+        echo $(fg $1)$(bg $2)$SYM_SEPARATOR
     fi
 }
 
@@ -117,12 +117,13 @@ generate_prompt() {
             next_part_name=$next_part[@]
             next_part_settings=("${!next_part_name}")
             next_bg_color=${next_part_settings[3]}
+            # Append separator
+            PS1+=$(separator $bg_color $next_bg_color)
         else
-            next_bg_color=default
+            # Append separator
+            PS1+=$(separator $bg_color)
         fi
 
-        # Append separator
-        PS1+=$(separator $bg_color $next_bg_color)
     done
 
     # Check if empty
