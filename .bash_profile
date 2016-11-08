@@ -61,12 +61,13 @@ separator() {
 generate_prompt() {
     # Settings
     # is enabled | part generation function | foreground color | background color
-    virtualenv_part_settings=(true virtualenv_part black magenta)
     dir_part_settings=(true dir_part black blue)
     git_part_settings=(true git_part black yellow)
+    venv_part_settings=(true venv_part black magenta)
+    ssh_part_settings=(true ssh_part black white)
 
     # Parts settings array (change parts order here)
-    settings=(virtualenv_part_settings dir_part_settings git_part_settings)
+    settings=(ssh_part_settings venv_part_settings dir_part_settings git_part_settings)
 
     # Current directory part
     dir_part="\w"
@@ -79,9 +80,17 @@ generate_prompt() {
     fi
 
     # Python virtual environment part
-    virtualenv_part=""
+    venv_part=""
     if [[ -n $VIRTUAL_ENV ]]; then
-       virtualenv_part=$(basename $VIRTUAL_ENV)
+       venv_part=$(basename $VIRTUAL_ENV)
+    fi
+
+    # SSH part
+    ssh_part=""
+    if [[ "$SSH_CONNECTION" && "$SSH_TTY" == $(tty) ]]; then
+        ssh_user=$(id -un)
+        ssh_host=$(hostname)
+        ssh_part="${ssh_user}@${ssh_host}"
     fi
 
     # Filter enabled nonempty parts
