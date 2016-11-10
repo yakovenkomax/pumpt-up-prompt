@@ -75,28 +75,38 @@ generate_prompt() {
     settings=(ssh_part_settings venv_part_settings dir_part_settings git_part_settings)
 
     # Current directory part
-    dir_part="\w"
+    dir_part=""
+    dir_part() {
+        dir_part="\w"
+    }
 
     # Git branch part
     git_part=""
-    GIT_PROMPT=$(__git_ps1 " %s")
-    if [[ -n $GIT_PROMPT ]]; then
-        git_part=$SYM_BRANCH$GIT_PROMPT
-    fi
+    git_part() {
+        GIT_PROMPT=$(__git_ps1 " %s")
+        if [[ -n $GIT_PROMPT ]]; then
+            git_part=$SYM_BRANCH$GIT_PROMPT
+        fi
+    }
 
     # Python virtual environment part
     venv_part=""
-    if [[ -n $VIRTUAL_ENV ]]; then
-       venv_part=$(basename $VIRTUAL_ENV)
-    fi
+    venv_part() {
+        if [[ -n $VIRTUAL_ENV ]]; then
+           venv_part=$(basename $VIRTUAL_ENV)
+        fi
+    }
 
     # SSH part
     ssh_part=""
-    if [[ "$SSH_CONNECTION" && "$SSH_TTY" == $(tty) ]]; then
-        ssh_user=$(id -un)
-        ssh_host=$(hostname)
-        ssh_part="${ssh_user}@${ssh_host}"
-    fi
+    ssh_part() {
+        if [[ "$SSH_CONNECTION" && "$SSH_TTY" == $(tty) ]]; then
+            ssh_user=$(id -un)
+            ssh_host=$(hostname)
+            ssh_part="${ssh_user}@${ssh_host}"
+        fi
+    }
+
 
     # Filter enabled nonempty parts
     enabled_parts=""
@@ -104,10 +114,14 @@ generate_prompt() {
         part=${settings[$i]}
         part_name=$part[@]
         part_settings=("${!part_name}")
-        part_value=${!part_settings[1]}
 
-        if [[ ${part_settings[0]} = true && -n $part_value ]]; then
-            enabled_parts+=${settings[$i]}" "
+        if [[ ${part_settings[0]} = true ]]; then
+            eval ${part_settings[1]}
+            part_value=${!part_settings[1]}
+
+            if [[ -n $part_value ]]; then
+                enabled_parts+=${settings[$i]}" "
+            fi
         fi
     done
     enabled_parts=($enabled_parts)
