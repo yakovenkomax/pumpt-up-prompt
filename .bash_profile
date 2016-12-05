@@ -18,13 +18,14 @@ export LESSCHARSET=utf-8
 ##################################
 
 # is enabled | part generation function name | foreground color | background color
+time_part_settings=(false time_part white black)
 dir_part_settings=(true dir_part black blue)
 git_part_settings=(true git_part black yellow)
 venv_part_settings=(true venv_part black magenta)
 ssh_part_settings=(true ssh_part black white)
 
 # Parts settings array (change parts order here)
-settings=(ssh_part_settings venv_part_settings dir_part_settings git_part_settings)
+settings=(time_part_settings ssh_part_settings venv_part_settings dir_part_settings git_part_settings)
 
 
 ##################################
@@ -96,6 +97,12 @@ generate_prompt() {
     ##################################
     #    Parts generation functions
     ##################################
+
+    # Time part
+    time_part=""
+    time_part() {
+        time_part=$(date +"%T")
+    }
 
     # Current directory part
     dir_part=""
