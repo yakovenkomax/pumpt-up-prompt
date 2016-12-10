@@ -2,18 +2,8 @@
 # https://github.com/yakovenkomax/pumpt-prompt
 
 ##################################
-#            Settings
+#             Icons
 ##################################
-
-# is enabled | segment generation function name | foreground color | background color
-time_segment_settings=(false time_segment white black)
-dir_segment_settings=(true dir_segment black blue)
-git_segment_settings=(true git_segment black yellow)
-venv_segment_settings=(true venv_segment black magenta)
-ssh_segment_settings=(true ssh_segment black white)
-screen_segment_settings=(true screen_segment black blue)
-
-# Icons
     # Separator symbols
     SYM_SEPARATOR=""
     SYM_SEPARATOR_THIN=""
@@ -22,6 +12,19 @@ screen_segment_settings=(true screen_segment black blue)
     # SYM_SEPARATOR_THIN=""
     # Branch symbol
     SYM_BRANCH=""
+
+
+##################################
+#            Settings
+##################################
+
+# segment function name | is enabled | has icon | icon symbol | foreground color | background color
+time_segment_settings=(time_segment false false "" white black)
+dir_segment_settings=(dir_segment true false "" black blue)
+git_segment_settings=(git_segment true true $SYM_BRANCH black yellow)
+venv_segment_settings=(venv_segment true false "" black magenta)
+ssh_segment_settings=(ssh_segment true false "" black white)
+screen_segment_settings=(screen_segment true false "" black blue)
 
 
 # Segments settings array (change segments order here)
@@ -61,9 +64,7 @@ get_index() {
     value=$2
 
     for i in ${!array[@]}; do
-        if [[ ${array[$i]} = $value ]]; then
-            echo "${i}";
-        fi
+        [[ ${array[$i]} = $value ]] && echo "${i}"
     done
 }
 
@@ -116,18 +117,14 @@ generate_prompt() {
         # Settings
         GIT_PS1_SHOWDIRTYSTATE=1
 
-        GIT_PROMPT=$(__git_ps1 " %s")
-        if [[ -n $GIT_PROMPT ]]; then
-            git_segment=$SYM_BRANCH$GIT_PROMPT
-        fi
+        GIT_PROMPT=$(__git_ps1 "%s")
+        [[ -n $GIT_PROMPT ]] && git_segment=$GIT_PROMPT
     }
 
     # Python virtual environment segment
     venv_segment=""
     venv_segment() {
-        if [[ -n $VIRTUAL_ENV ]]; then
-           venv_segment=$(basename $VIRTUAL_ENV)
-        fi
+        [[ -n $VIRTUAL_ENV ]] && venv_segment=$(basename $VIRTUAL_ENV)
     }
 
     # SSH segment
@@ -143,9 +140,7 @@ generate_prompt() {
     # Screen segment
     screen_segment=""
     screen_segment() {
-        if [[ -n $STY ]]; then
-            screen_segment=$STY
-        fi
+        [[ -n $STY ]] && screen_segment=$STY
     }
 
 
@@ -159,14 +154,12 @@ generate_prompt() {
         segment_name=$segment[@]
         segment_settings=("${!segment_name}")
 
-        if [[ ${segment_settings[0]} = true ]]; then
+        if [[ ${segment_settings[1]} = true ]]; then
             # Call the segment generation function
-            eval ${segment_settings[1]}
-            segment_value=${!segment_settings[1]}
+            eval ${segment_settings[0]}
+            segment_value=${!segment_settings[0]}
 
-            if [[ -n $segment_value ]]; then
-                enabled_segments+=${settings[$i]}" "
-            fi
+            [[ -n $segment_value ]] && enabled_segments+=${settings[$i]}" "
         fi
     done
     enabled_segments=($enabled_segments)
@@ -181,19 +174,21 @@ generate_prompt() {
         segment=${enabled_segments[$i]}
         segment_name=$segment[@]
         segment_settings=("${!segment_name}")
-        segment_value=${!segment_settings[1]}
-        fg_color=${segment_settings[2]}
-        bg_color=${segment_settings[3]}
+        segment_value=${!segment_settings[0]}
+        segment_icon="" 
+        [[ ${segment_settings[2]} = true ]] && segment_icon=${segment_settings[3]}" "
+        fg_color=${segment_settings[4]}
+        bg_color=${segment_settings[5]}
 
         # Append segment content to the prompt string
-        PS1+=$(fg $fg_color)$(bg $bg_color)" "$segment_value" "
+        PS1+=$(fg $fg_color)$(bg $bg_color)" "$segment_icon$segment_value" "
 
         # Check if the current segment is the last
         if [[ $(($i + 1)) -lt ${#enabled_segments[@]} ]]; then
             next_segment=${enabled_segments[$(($i + 1))]}
             next_segment_name=$next_segment[@]
             next_segment_settings=("${!next_segment_name}")
-            next_bg_color=${next_segment_settings[3]}
+            next_bg_color=${next_segment_settings[5]}
             # Append a separator
             PS1+=$(separator $bg_color $next_bg_color)
         else
@@ -203,9 +198,7 @@ generate_prompt() {
     done
 
     # Check if the prompt string is empty
-    if [[ -z "$PS1" ]]; then
-        PS1+=$(separator default)
-    fi
+    [[ -z "$PS1" ]] && PS1+=$(separator default)
 
     # Reset colors and append a space in the end
     PS1+=$(fg reset)" "
