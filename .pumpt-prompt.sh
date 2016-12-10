@@ -12,6 +12,17 @@ git_part_settings=(true git_part black yellow)
 venv_part_settings=(true venv_part black magenta)
 ssh_part_settings=(true ssh_part black white)
 
+# Icons
+    # Separator symbols
+    SYM_SEPARATOR=""
+    SYM_SEPARATOR_THIN=""
+    # Separator symbols with reduced height
+    # SYM_SEPARATOR=""
+    # SYM_SEPARATOR_THIN=""
+    # Branch symbol
+    SYM_BRANCH=""
+
+
 # Parts settings array (change parts order here)
 settings=(time_part_settings ssh_part_settings venv_part_settings dir_part_settings git_part_settings)
 
@@ -58,12 +69,6 @@ get_index() {
 # Separator generation function
 #   Ex.: separator bg_color [next_bg_color]
 separator() {
-    # Separator symbols
-    #   Requires Menlo for Powerline font:
-    #   https://github.com/abertsch/Menlo-for-Powerline
-    SYM_SEPARATOR=""
-    SYM_SEPARATOR_THIN=""
-
     if [[ $# -eq 1 ]]; then
         echo $(bg reset)$(fg $1)$SYM_SEPARATOR
     else
@@ -109,11 +114,6 @@ generate_prompt() {
 
         # Settings
         GIT_PS1_SHOWDIRTYSTATE=1
-
-        # Branch symbol
-        #   Requires Menlo for Powerline font:
-        #   https://github.com/abertsch/Menlo-for-Powerline
-        SYM_BRANCH=""
 
         GIT_PROMPT=$(__git_ps1 " %s")
         if [[ -n $GIT_PROMPT ]]; then
