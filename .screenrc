@@ -1,0 +1,5 @@
+shell -bash
+
+defutf8 on
+defencoding utf-8
+encoding utf8 utf8
