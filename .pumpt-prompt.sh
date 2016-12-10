@@ -5,13 +5,13 @@
 #            Settings
 ##################################
 
-# is enabled | part generation function name | foreground color | background color
-time_part_settings=(false time_part white black)
-dir_part_settings=(true dir_part black blue)
-git_part_settings=(true git_part black yellow)
-venv_part_settings=(true venv_part black magenta)
-ssh_part_settings=(true ssh_part black white)
-screen_part_settings=(true screen_part black blue)
+# is enabled | segment generation function name | foreground color | background color
+time_segment_settings=(false time_segment white black)
+dir_segment_settings=(true dir_segment black blue)
+git_segment_settings=(true git_segment black yellow)
+venv_segment_settings=(true venv_segment black magenta)
+ssh_segment_settings=(true ssh_segment black white)
+screen_segment_settings=(true screen_segment black blue)
 
 # Icons
     # Separator symbols
@@ -24,8 +24,8 @@ screen_part_settings=(true screen_part black blue)
     SYM_BRANCH=""
 
 
-# Parts settings array (change parts order here)
-settings=(time_part_settings ssh_part_settings screen_part_settings venv_part_settings dir_part_settings git_part_settings)
+# Segments settings array (change segments order here)
+settings=(time_segment_settings ssh_segment_settings screen_segment_settings venv_segment_settings dir_segment_settings git_segment_settings)
 
 
 ##################################
@@ -89,24 +89,24 @@ separator() {
 generate_prompt() {
 
     ##################################
-    #    Parts generation functions
+    #    Segments generation functions
     ##################################
 
-    # Time part
-    time_part=""
-    time_part() {
-        time_part=$(date +"%T")
+    # Time segment
+    time_segment=""
+    time_segment() {
+        time_segment=$(date +"%T")
     }
 
-    # Current directory part
-    dir_part=""
-    dir_part() {
-        dir_part="\w"
+    # Current directory segment
+    dir_segment=""
+    dir_segment() {
+        dir_segment="\w"
     }
 
-    # Git branch part
-    git_part=""
-    git_part() {
+    # Git branch segment
+    git_segment=""
+    git_segment() {
         # Git completion and prompt:
         #   Requires git prompt and completion plugins:
         #   https://github.com/git/git/tree/master/contrib/completion
@@ -118,82 +118,82 @@ generate_prompt() {
 
         GIT_PROMPT=$(__git_ps1 " %s")
         if [[ -n $GIT_PROMPT ]]; then
-            git_part=$SYM_BRANCH$GIT_PROMPT
+            git_segment=$SYM_BRANCH$GIT_PROMPT
         fi
     }
 
-    # Python virtual environment part
-    venv_part=""
-    venv_part() {
+    # Python virtual environment segment
+    venv_segment=""
+    venv_segment() {
         if [[ -n $VIRTUAL_ENV ]]; then
-           venv_part=$(basename $VIRTUAL_ENV)
+           venv_segment=$(basename $VIRTUAL_ENV)
         fi
     }
 
-    # SSH part
-    ssh_part=""
-    ssh_part() {
+    # SSH segment
+    ssh_segment=""
+    ssh_segment() {
         if [[ "$SSH_CONNECTION" && "$SSH_TTY" == $(tty) ]]; then
             ssh_user=$(id -un)
             ssh_host=$(hostname)
-            ssh_part="${ssh_user}@${ssh_host}"
+            ssh_segment="${ssh_user}@${ssh_host}"
         fi
     }
 
-    # Screen part
-    screen_part=""
-    screen_part() {
+    # Screen segment
+    screen_segment=""
+    screen_segment() {
         if [[ -n $STY ]]; then
-            screen_part=$STY
+            screen_segment=$STY
         fi
     }
 
 
     ##################################
-    #         Parts filtering
+    #       Segments filtering
     ##################################
 
-    enabled_parts=""
+    enabled_segments=""
     for i in ${!settings[@]}; do
-        part=${settings[$i]}
-        part_name=$part[@]
-        part_settings=("${!part_name}")
+        segment=${settings[$i]}
+        segment_name=$segment[@]
+        segment_settings=("${!segment_name}")
 
-        if [[ ${part_settings[0]} = true ]]; then
-            # Call the part generation function
-            eval ${part_settings[1]}
-            part_value=${!part_settings[1]}
+        if [[ ${segment_settings[0]} = true ]]; then
+            # Call the segment generation function
+            eval ${segment_settings[1]}
+            segment_value=${!segment_settings[1]}
 
-            if [[ -n $part_value ]]; then
-                enabled_parts+=${settings[$i]}" "
+            if [[ -n $segment_value ]]; then
+                enabled_segments+=${settings[$i]}" "
             fi
         fi
     done
-    enabled_parts=($enabled_parts)
+    enabled_segments=($enabled_segments)
 
 
     ##################################
-    #       Parts concatenation
+    #     Segments concatenation
     ##################################
 
     PS1=""
-    for i in ${!enabled_parts[@]}; do
-        part=${enabled_parts[$i]}
-        part_name=$part[@]
-        part_settings=("${!part_name}")
-        part_value=${!part_settings[1]}
-        fg_color=${part_settings[2]}
-        bg_color=${part_settings[3]}
+    for i in ${!enabled_segments[@]}; do
+        segment=${enabled_segments[$i]}
+        segment_name=$segment[@]
+        segment_settings=("${!segment_name}")
+        segment_value=${!segment_settings[1]}
+        fg_color=${segment_settings[2]}
+        bg_color=${segment_settings[3]}
 
-        # Append part content to the prompt string
-        PS1+=$(fg $fg_color)$(bg $bg_color)" "$part_value" "
+        # Append segment content to the prompt string
+        PS1+=$(fg $fg_color)$(bg $bg_color)" "$segment_value" "
 
-        # Check if the current part is the last
-        if [[ $(($i + 1)) -lt ${#enabled_parts[@]} ]]; then
-            next_part=${enabled_parts[$(($i + 1))]}
-            next_part_name=$next_part[@]
-            next_part_settings=("${!next_part_name}")
-            next_bg_color=${next_part_settings[3]}
+        # Check if the current segment is the last
+        if [[ $(($i + 1)) -lt ${#enabled_segments[@]} ]]; then
+            next_segment=${enabled_segments[$(($i + 1))]}
+            next_segment_name=$next_segment[@]
+            next_segment_settings=("${!next_segment_name}")
+            next_bg_color=${next_segment_settings[3]}
             # Append a separator
             PS1+=$(separator $bg_color $next_bg_color)
         else
