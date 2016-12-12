@@ -11,24 +11,30 @@
     # SYM_SEPARATOR=""
     # SYM_SEPARATOR_THIN=""
     # Branch symbol
-    SYM_BRANCH=""
+    SYM_TIME=""
+    SYM_USER=""
+    SYM_DIR=""
+    SYM_GIT=""
+    SYM_VENV=""
+    SYM_SSH=""
+    SYM_SCREEN=""
 
 
 ##################################
 #            Settings
 ##################################
 
-# segment function name | is enabled | has icon | icon symbol | foreground color | background color
-time_segment_settings=(time_segment false false "" white black)
-dir_segment_settings=(dir_segment true false "" black blue)
-git_segment_settings=(git_segment true true $SYM_BRANCH black yellow)
-venv_segment_settings=(venv_segment true false "" black magenta)
-ssh_segment_settings=(ssh_segment true false "" black white)
-screen_segment_settings=(screen_segment true false "" black blue)
-
+# Segments settings      segment function | is enabled | has icon | icon symbol | foreground | background
+time_segment_settings=(  time_segment       false        false      "$SYM_TIME"   white        black)
+user_segment_settings=(  user_segment       false        false      "$SYM_USER"   black        blue)
+dir_segment_settings=(   dir_segment        true         false      "$SYM_DIR"    black        blue)
+git_segment_settings=(   git_segment        true         true       "$SYM_GIT"    black        yellow)
+venv_segment_settings=(  venv_segment       true         false      "$SYM_VENV"   black        magenta)
+ssh_segment_settings=(   ssh_segment        true         false      "$SYM_SSH"    black        white)
+screen_segment_settings=(screen_segment     true         false      "$SYM_SCREEN" black        blue)
 
 # Segments settings array (change segments order here)
-settings=(time_segment_settings ssh_segment_settings screen_segment_settings venv_segment_settings dir_segment_settings git_segment_settings)
+settings=(time_segment_settings ssh_segment_settings screen_segment_settings venv_segment_settings user_segment_settings dir_segment_settings git_segment_settings)
 
 
 ##################################
@@ -90,13 +96,19 @@ separator() {
 generate_prompt() {
 
     ##################################
-    #    Segments generation functions
+    #       Segments generation
     ##################################
 
     # Time segment
     time_segment=""
     time_segment() {
         time_segment=$(date +"%T")
+    }
+
+    # Current user segment
+    user_segment=""
+    user_segment() {
+        user_segment="\u"
     }
 
     # Current directory segment
@@ -175,7 +187,7 @@ generate_prompt() {
         segment_name=$segment[@]
         segment_settings=("${!segment_name}")
         segment_value=${!segment_settings[0]}
-        segment_icon="" 
+        segment_icon=""
         [[ ${segment_settings[2]} = true ]] && segment_icon=${segment_settings[3]}" "
         fg_color=${segment_settings[4]}
         bg_color=${segment_settings[5]}
