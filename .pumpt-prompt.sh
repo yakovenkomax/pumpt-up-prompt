@@ -1,43 +1,23 @@
 # A pumped shell prompt.
 # https://github.com/yakovenkomax/pumpt-prompt
 
-##################################
-#             Icons
-##################################
-    # Separator symbols
-    SYM_SEPARATOR=""
-    SYM_SEPARATOR_THIN=""
-    # Separator symbols with reduced height
-    # SYM_SEPARATOR=""
-    # SYM_SEPARATOR_THIN=""
-
-    # Segments symbols
-    SYM_TIME=""
-    SYM_USER=""
-    SYM_HOST=""
-    SYM_DIR=""
-    SYM_GIT=""
-    SYM_VENV=""
-    SYM_SSH=""
-    SYM_SCREEN=""
-
 
 ##################################
 #            Settings
 ##################################
 
-# Segments settings      segment function | is enabled | has icon | icon symbol | foreground | background
-time_segment_settings=(  time_segment       false        false      "$SYM_TIME"   white        black)
-user_segment_settings=(  user_segment       false        false      "$SYM_USER"   black        blue)
-host_segment_settings=(  host_segment       false        false      "$SYM_HOST"   black        blue)
-dir_segment_settings=(   dir_segment        true         false      "$SYM_DIR"    black        blue)
-git_segment_settings=(   git_segment        true         true       "$SYM_GIT"    black        yellow)
-venv_segment_settings=(  venv_segment       true         false      "$SYM_VENV"   black        magenta)
-ssh_segment_settings=(   ssh_segment        true         false      "$SYM_SSH"    black        white)
-screen_segment_settings=(screen_segment     true         false      "$SYM_SCREEN" black        blue)
+# Segments settings      segment function | is enabled | has icon | icon | foreground | background
+time_segment_settings=(  time_segment       true         true       "�"    white        black)
+user_segment_settings=(  user_segment       false        false      "�"    black        blue)
+ssh_segment_settings=(   ssh_segment        true         false      "�"    black        white)
+host_segment_settings=(  host_segment       false        false      ""     black        blue)
+screen_segment_settings=(screen_segment     true         false      "�"    black        blue)
+venv_segment_settings=(  venv_segment       true         false      "�"    black        magenta)
+dir_segment_settings=(   dir_segment        true         false      "�"    black        blue)
+git_segment_settings=(   git_segment        true         true       "�"    black        yellow)
 
 # Segments settings array (change segments order here)
-settings=(time_segment_settings ssh_segment_settings screen_segment_settings venv_segment_settings user_segment_settings host_segment_settings dir_segment_settings git_segment_settings)
+settings=(time_segment_settings user_segment_settings ssh_segment_settings host_segment_settings screen_segment_settings venv_segment_settings dir_segment_settings git_segment_settings)
 
 
 ##################################
@@ -80,6 +60,9 @@ get_index() {
 # Separator generation function
 #   Ex.: separator bg_color [next_bg_color]
 separator() {
+    SYM_SEPARATOR="�"
+    SYM_SEPARATOR_THIN="�"
+
     if [[ $# -eq 1 ]]; then
         echo $(bg reset)$(fg $1)$SYM_SEPARATOR
     else
@@ -114,10 +97,32 @@ generate_prompt() {
         user_segment="\u"
     }
 
+    # SSH segment
+    ssh_segment=""
+    ssh_segment() {
+        if [[ "$SSH_CONNECTION" && "$SSH_TTY" == $(tty) ]]; then
+            ssh_user=$(id -un)
+            ssh_host=$(hostname)
+            ssh_segment="${ssh_user}@${ssh_host}"
+        fi
+    }
+
     # Hostname segment
     host_segment=""
     host_segment() {
         host_segment="\H"
+    }
+
+    # Screen segment
+    screen_segment=""
+    screen_segment() {
+        [[ -n $STY ]] && screen_segment=$STY
+    }
+
+    # Python virtual environment segment
+    venv_segment=""
+    venv_segment() {
+        [[ -n $VIRTUAL_ENV ]] && venv_segment=$(basename $VIRTUAL_ENV)
     }
 
     # Current directory segment
@@ -126,7 +131,7 @@ generate_prompt() {
         dir_segment="\w"
     }
 
-    # Git branch segment
+    # Git segment
     git_segment=""
     git_segment() {
         # Git completion and prompt:
@@ -140,28 +145,6 @@ generate_prompt() {
 
         GIT_PROMPT=$(__git_ps1 "%s")
         [[ -n $GIT_PROMPT ]] && git_segment=$GIT_PROMPT
-    }
-
-    # Python virtual environment segment
-    venv_segment=""
-    venv_segment() {
-        [[ -n $VIRTUAL_ENV ]] && venv_segment=$(basename $VIRTUAL_ENV)
-    }
-
-    # SSH segment
-    ssh_segment=""
-    ssh_segment() {
-        if [[ "$SSH_CONNECTION" && "$SSH_TTY" == $(tty) ]]; then
-            ssh_user=$(id -un)
-            ssh_host=$(hostname)
-            ssh_segment="${ssh_user}@${ssh_host}"
-        fi
-    }
-
-    # Screen segment
-    screen_segment=""
-    screen_segment() {
-        [[ -n $STY ]] && screen_segment=$STY
     }
 
 
