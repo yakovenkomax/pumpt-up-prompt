@@ -7,14 +7,14 @@
 ##################################
 
 # Segments settings      segment function | is enabled | has icon | icon | foreground | background
-time_segment_settings=(  time_segment       true         true       "�"    white        black)
-user_segment_settings=(  user_segment       false        false      "�"    black        blue)
-ssh_segment_settings=(   ssh_segment        true         false      "�"    black        white)
-host_segment_settings=(  host_segment       false        false      ""     black        blue)
-screen_segment_settings=(screen_segment     true         false      "�"    black        blue)
-venv_segment_settings=(  venv_segment       true         false      "�"    black        magenta)
-dir_segment_settings=(   dir_segment        true         false      "�"    black        blue)
-git_segment_settings=(   git_segment        true         true       "�"    black        yellow)
+time_segment_settings=(  time_segment       true         false      ""    white        black)
+user_segment_settings=(  user_segment       false        false      ""    black        blue)
+ssh_segment_settings=(   ssh_segment        true         false      ""    black        white)
+host_segment_settings=(  host_segment       false        false      ""    black        blue)
+screen_segment_settings=(screen_segment     true         false      ""    black        blue)
+venv_segment_settings=(  venv_segment       true         false      ""    black        magenta)
+dir_segment_settings=(   dir_segment        true         false      ""    black        blue)
+git_segment_settings=(   git_segment        true         true       ""    black        yellow)
 
 # Segments settings array (change segments order here)
 settings=(time_segment_settings user_segment_settings ssh_segment_settings host_segment_settings screen_segment_settings venv_segment_settings dir_segment_settings git_segment_settings)
@@ -60,8 +60,8 @@ get_index() {
 # Separator generation function
 #   Ex.: separator bg_color [next_bg_color]
 separator() {
-    SYM_SEPARATOR="�"
-    SYM_SEPARATOR_THIN="�"
+    SYM_SEPARATOR=""
+    SYM_SEPARATOR_THIN=""
 
     if [[ $# -eq 1 ]]; then
         echo $(bg reset)$(fg $1)$SYM_SEPARATOR
