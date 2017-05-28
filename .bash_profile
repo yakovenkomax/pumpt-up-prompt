@@ -14,4 +14,4 @@ bind 'set completion-ignore-case on'
 [[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
 
 # Enable the pumpt prompt
-[[ -f ~/.pumpt-prompt.sh ]] && . ~/.pumpt-prompt.sh
+[[ -f ~/.pumpt-up-prompt.sh ]] && . ~/.pumpt-up-prompt.sh

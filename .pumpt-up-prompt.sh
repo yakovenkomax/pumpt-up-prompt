@@ -1,5 +1,5 @@
-# A pumped shell prompt.
-# https://github.com/yakovenkomax/pumpt-prompt
+# A pumped up shell prompt. Light, beautiful and hard to pronounce.
+# https://github.com/yakovenkomax/pumpt-up-prompt
 
 
 ##################################
