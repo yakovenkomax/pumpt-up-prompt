@@ -85,10 +85,17 @@ generate_prompt() {
     #       Segments generation
     ##################################
 
+    # Time segment settings
+    time_segment_use_12hour_format=false
+
     # Time segment
     time_segment=""
     time_segment() {
-        time_segment=$(date +"%T")
+        if [[ $time_segment_use_12hour_format == true ]]; then
+            time_segment=$(date +"\@")
+        else
+            time_segment=$(date +"\A")
+        fi
     }
 
     # Current user segment
@@ -100,7 +107,7 @@ generate_prompt() {
     # SSH segment
     ssh_segment=""
     ssh_segment() {
-        if [[ "$SSH_CONNECTION" && "$SSH_TTY" == $(tty) ]]; then
+        if [[ $SSH_CONNECTION && $SSH_TTY == $(tty) ]]; then
             ssh_user=$(id -un)
             ssh_host=$(hostname)
             ssh_segment="${ssh_user}@${ssh_host}"
