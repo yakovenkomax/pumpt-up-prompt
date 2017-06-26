@@ -69,7 +69,16 @@ Start with this configuration:
 Add `line-height` (1.2em by default) and `font-size` (1em by default) changes if needed.
 
 ### Terminal.app
-Terminal.app has a mechanism that changes color for the last prompt character (for better contrast probably). There is no way to disable this behavior. I suggest you try other emulators if that bothers you.
+Terminal.app has a mechanism that changes color for the last prompt character ([Some research on the topic](https://github.com/fish-shell/fish-shell/issues/3163)). There is no way to disable this behavior. I suggest you try other emulators if that bothers you.
+
+## TODO
+- [ ] Add more previews
+- [ ] Create complete release
+- [ ] Add terminal theme recommendations
+- [ ] Remove line wrap bug caused by not closed color tags
+- [ ] Research possibility of using 256 colors
+- [ ] Windows OS adaptation
+- [ ] Fix git autocomplete when using git aliases
 
 ## Credits
 Inspired by [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh) and [agnoster theme](https://github.com/robbyrussell/oh-my-zsh/wiki/Themes#agnoster).<br/>
