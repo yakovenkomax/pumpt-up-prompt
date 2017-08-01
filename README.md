@@ -64,9 +64,9 @@ Hyper treats characters as a browser (which differs from how iTerm does it), so 
 Start with this configuration:
 
     // custom css to embed in the terminal window
-    termCSS: '.unicode-node { margin-left: -0.5px; overflow: hidden; }',
+    termCSS: '.unicode-node { margin-left: -1px; padding-right: 1px; overflow: hidden; }',
 
-Add `line-height` (1.2em by default) and `font-size` (1em by default) changes if needed.
+Then add `line-height` (1.2em by default) and `font-size` (1em by default) changes if needed.
 
 ### Terminal.app
 Terminal.app has a mechanism that changes color for the last prompt character ([Some research on the topic](https://github.com/fish-shell/fish-shell/issues/3163)). There is no way to disable this behavior. I suggest you try other emulators if that bothers you.
