@@ -1,15 +1,17 @@
 # Pumped Up Prompt
 Pumped Up Prompt is a set of solutions to improve your shell experience. It contains:
 1. Custom segmented shell prompt;
-2. Font with segment separators and icons;
+2. Font with segment separators and icons*;
 3. Optional improvements.
+
+*Pumped Up Prompt uses the same Unicode character places as Powerline Patched fonts, so you can use Pumped Up Prompt fonts instead of them if you don't need other functionality.
 
 ## Features
 Light 🎈<br/>
-	Pure bash. No hidden engines in background. Fast even in huge projects.<br/>
+	Pure bash. No hidden engines in the background. Fast even in huge projects.<br/>
     
 Beautiful 🎀<br/>
-	All separators are handcrafted and pixel perfect. Enjoy the smoothness.<br/>
+	All separators are handcrafted and pixel-perfect. Enjoy the smoothness.<br/>
     
 Hard to pronounce 🤔<br/>
 	Not really a feature, but... you can use it as a tongue twister!
@@ -26,8 +28,10 @@ Hard to pronounce 🤔<br/>
 Prompt:
 
 1. Copy `.pumpt-up-prompt.sh` to your root directory;
-2. Include pumpt-up-prompt script to your `.bash_profile` by adding `[[ -f ~/.pumpt-up-prompt.sh ]] && . ~/.pumpt-up-prompt.sh` (or copy .bash_profile file from this repo).
-    
+2. Include pumpt-up-prompt script to your `.bash_profile` by adding:<br/>
+`[[ -f ~/.pumpt-up-prompt.sh ]] && . ~/.pumpt-up-prompt.sh`<br/>
+or just copy the `.bash_profile` file from this repo.
+
 Font (separators and icons):
 
 1. Download your favorite font from the `Fonts` folder;
@@ -39,7 +43,7 @@ Git Prompt Plugin:
     
 \[Optional\] Install a better bash default configuration - [Sensible Bash](https://github.com/mrzool/bash-sensible).
 
-## Configuration
+## Segments
 Segments color and order are changed in 'Settings' block inside `.pumpt-up-prompt.sh`.
 
 Segment | Description
