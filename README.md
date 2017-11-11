@@ -2,7 +2,8 @@
 	<img width="115" alt="Pumpt Up Prompt" src="https://user-images.githubusercontent.com/5172360/32691627-ba884c4a-c71b-11e7-9ed3-ab72ee2cb72a.png">
 </p>
 
-# Pumped Up Prompt
+<h1 align="center">Pumped Up Prompt</h1>
+
 Pumped Up Prompt is a set of solutions to improve your shell experience. It contains:
 1. Custom segmented shell prompt;
 2. Font with segment separators and icons*;
@@ -29,23 +30,28 @@ Hard to pronounce 🤔<br/>
 **Font**: Menlo PP12
 
 ## Installation
-Prompt:
+**Prompt:**
 
 1. Copy `.pumpt-up-prompt.sh` to your root directory;
 2. Include pumpt-up-prompt script to your `.bash_profile` by adding:<br/>
 `[[ -f ~/.pumpt-up-prompt.sh ]] && . ~/.pumpt-up-prompt.sh`<br/>
 or just copy the `.bash_profile` file from this repo.
 
-Font (separators and icons):
+**Font (separators and icons):**
 
 1. Download your favorite font from the `Fonts` folder;
 2. Choose a font depending on the font size you are using, ex. take Menlo PP13 if you are using 13pt font size in your terminal.
 
-Git Prompt Plugin:
+**Git Prompt Plugin:**
 
 * Copy `git-prompt.sh` and `git-completion.bash` from [Git Prompt Plugin](https://github.com/git/git/tree/master/contrib/completion) to your root folder;
-    
-\[Optional\] Install a better bash default configuration - [Sensible Bash](https://github.com/mrzool/bash-sensible).
+
+**\[Optional\] Install the latest Bash:**
+1. Install Homebrew `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+2. Install Bash `brew install bash`
+
+**\[Optional\] Install a better bash default configuration**
+[Sensible Bash](https://github.com/mrzool/bash-sensible).
 
 ## Segments
 Segments' color and order are changed in 'Settings' block inside `.pumpt-up-prompt.sh`.
