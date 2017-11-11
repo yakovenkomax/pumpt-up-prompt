@@ -1,10 +1,12 @@
+<img width="888" alt="Pumpt Up Prompt" src="https://user-images.githubusercontent.com/5172360/32691509-875b2290-c719-11e7-8b98-bb02ccb4613b.png">
+
 # Pumped Up Prompt
 Pumped Up Prompt is a set of solutions to improve your shell experience. It contains:
 1. Custom segmented shell prompt;
 2. Font with segment separators and icons*;
 3. Optional improvements.
 
-*Pumped Up Prompt uses the same Unicode character places as Powerline Patched fonts, so you can use Pumped Up Prompt fonts instead of them if you don't need other functionality.
+*Pumped Up Prompt uses the same Unicode places as Powerline Patched fonts (e.g. [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)), so you can use Pumped Up Prompt fonts instead of them if you don't need other functionality.
 
 ## Features
 Light 🎈<br/>
@@ -44,7 +46,7 @@ Git Prompt Plugin:
 \[Optional\] Install a better bash default configuration - [Sensible Bash](https://github.com/mrzool/bash-sensible).
 
 ## Segments
-Segments color and order are changed in 'Settings' block inside `.pumpt-up-prompt.sh`.
+Segments' color and order are changed in 'Settings' block inside `.pumpt-up-prompt.sh`.
 
 Segment | Description
 ------- | -----------
@@ -77,10 +79,10 @@ Terminal.app has a mechanism that changes color for the last prompt character ([
 
 ## TODO
 - [ ] Add more previews
-- [ ] Create complete release
+- [ ] Create a complete release
 - [ ] Add terminal theme recommendations
-- [ ] Remove line wrap bug caused by not closed color tags
-- [ ] Research possibility of using 256 colors
+- [ ] Remove line wrap bug caused by unclosed color tags
+- [ ] Research the possibility of using 256 colors
 - [ ] Windows OS adaptation
 - [ ] Fix git autocomplete when using git aliases
 
