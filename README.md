@@ -1,4 +1,6 @@
-<img width="888" alt="Pumpt Up Prompt" src="https://user-images.githubusercontent.com/5172360/32691509-875b2290-c719-11e7-8b98-bb02ccb4613b.png">
+<p align="center">
+	<img width="115" alt="Pumpt Up Prompt" src="https://user-images.githubusercontent.com/5172360/32691627-ba884c4a-c71b-11e7-9ed3-ab72ee2cb72a.png">
+</p>
 
 # Pumped Up Prompt
 Pumped Up Prompt is a set of solutions to improve your shell experience. It contains:
