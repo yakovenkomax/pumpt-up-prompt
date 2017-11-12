@@ -1,8 +1,11 @@
-# Aliases
+# General aliases
 alias rm='rm -i'
 alias ls='ls -GFha1'
 alias mkdir='mkdir -pv'
+
+# Git aliases
 alias gst='git status'
+alias gf='git fetch'
 alias gb='git branch'
 alias gco='git checkout'
 alias gcb='git checkout -b'
@@ -11,6 +14,7 @@ alias gc='git commit'
 alias 'gc!'='git commit --amend -m ""'
 alias glog='git log --graph --color --decorate --oneline'
 alias grup='git remote update'
+alias grod='git rebase origin/develop'
 alias grom='git rebase origin/master'
-alias gsu='git submodule init;git submodule sync;git submodule update'
+alias gsu='git submodule update'
 alias gwipe='git clean -df;git checkout -- .'
