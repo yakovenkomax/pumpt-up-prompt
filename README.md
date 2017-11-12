@@ -50,13 +50,13 @@ Copy `git-prompt.sh` and `git-completion.bash` from [Git Prompt Plugin](https://
 
 **4. \[Optional\] Install the latest Bash version:**
 
-1. Install Homebrew<br/>
+1. Install Homebrew:<br/>
 	`ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
-2. Install Bash<br/>
+2. Install Bash:<br/>
 	`brew install bash`
-3. Add the new shell to the list of allowed shells<br/>
+3. Add the new shell to the list of allowed shells:<br/>
 	`sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'`
-4. Change your shell to the new shell<br/>
+4. Change your shell to the new shell:<br/>
 	`chsh -s /usr/local/bin/bash`
 
 **5. \[Optional\] Install a better bash default configuration with [Sensible Bash](https://github.com/mrzool/bash-sensible)**
@@ -66,7 +66,7 @@ Copy `git-prompt.sh` and `git-completion.bash` from [Git Prompt Plugin](https://
 **7. \[Optional\] Copy `.bash_aliases` to your root directory to get some useful aliases from [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh/wiki/Cheatsheet).**
 
 ## Segments
-Segments' color and order are changed in 'Settings' block inside `pumpt-up-prompt.sh`.
+Segments' color, order and icons are changed in the 'Settings' block inside `pumpt-up-prompt.sh`.
 
 Segment | Description
 ------- | -----------
