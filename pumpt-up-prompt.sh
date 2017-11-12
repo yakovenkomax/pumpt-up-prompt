@@ -144,14 +144,18 @@ generate_prompt() {
         # Git completion and prompt:
         #   Requires git prompt and completion plugins:
         #   https://github.com/git/git/tree/master/contrib/completion
-        source ~/.git-completion.bash
-        source ~/.git-prompt.sh
+        if [[ -f ~/git-completion.bash && -f ~/git-prompt.sh ]]; then
+            . ~/git-completion.bash
+            . ~/git-prompt.sh
 
-        # Settings
-        GIT_PS1_SHOWDIRTYSTATE=1
+            # Settings
+            GIT_PS1_SHOWDIRTYSTATE=1
 
-        GIT_PROMPT=$(__git_ps1 "%s")
-        [[ -n $GIT_PROMPT ]] && git_segment=$GIT_PROMPT
+            GIT_PROMPT=$(__git_ps1 "%s")
+            [[ -n $GIT_PROMPT ]] && git_segment=$GIT_PROMPT
+        else
+            printf "Pumped Up Prompt error: Git plugin not found.\n"
+        fi
     }
 
 
