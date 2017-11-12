@@ -32,26 +32,32 @@ Hard to pronounce 🤔<br/>
 ## Installation
 **Prompt:**
 
-1. Copy `.pumpt-up-prompt.sh` to your root directory;
+1. Copy `pumpt-up-prompt.sh` to your root directory;
 2. Include pumpt-up-prompt script to your `.bash_profile` by adding:<br/>
-`[[ -f ~/.pumpt-up-prompt.sh ]] && . ~/.pumpt-up-prompt.sh`<br/>
+`[[ -f ~/pumpt-up-prompt.sh ]] && . ~/pumpt-up-prompt.sh`<br/>
 or just copy the `.bash_profile` file from this repo.
 
 **Font (separators and icons):**
 
 1. Download your favorite font from the `Fonts` folder;
-2. Choose a font depending on the font size you are using, ex. take Menlo PP13 if you are using 13pt font size in your terminal.
+2. Choose a font depending on the font size you are using, ex. take Menlo PP15 if you are using 15pt font size in your terminal.
 
 **Git Prompt Plugin:**
 
 * Copy `git-prompt.sh` and `git-completion.bash` from [Git Prompt Plugin](https://github.com/git/git/tree/master/contrib/completion) to your root folder;
 
-**\[Optional\] Install the latest Bash:**
-1. Install Homebrew `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
-2. Install Bash `brew install bash`
+**\[Optional\] Install the latest Bash version:**
 
-**\[Optional\] Install a better bash default configuration**
-[Sensible Bash](https://github.com/mrzool/bash-sensible).
+1. Install Homebrew<br/>
+	`ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+2. Install Bash<br/>
+	`brew install bash`
+3. Add the new shell to the list of allowed shells<br/>
+	`sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'`
+4. Change your shell to the new shell<br/>
+	`chsh -s /usr/local/bin/bash`
+
+**\[Optional\] Install a better bash default configuration with [Sensible Bash](https://github.com/mrzool/bash-sensible)**
 
 ## Segments
 Segments' color and order are changed in 'Settings' block inside `.pumpt-up-prompt.sh`.
@@ -86,6 +92,7 @@ Then add `line-height` (1.2em by default) and `font-size` (1em by default) chang
 Terminal.app has a mechanism that changes color for the last prompt character ([Some research on the topic](https://github.com/fish-shell/fish-shell/issues/3163)). There is no way to disable this behavior. I suggest you try other emulators if that bothers you.
 
 ## TODO
+- [ ] Update font files for the Iterm2 v3
 - [ ] Add more previews
 - [ ] Create a complete release
 - [ ] Add terminal theme recommendations
