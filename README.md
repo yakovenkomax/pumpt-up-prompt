@@ -44,7 +44,7 @@ or just copy the `.bash_profile` file from this repo.
 
 **3. Git Prompt Plugin:**
 
-* Copy `git-prompt.sh` and `git-completion.bash` from [Git Prompt Plugin](https://github.com/git/git/tree/master/contrib/completion) to your root folder;
+Copy `git-prompt.sh` and `git-completion.bash` from [Git Prompt Plugin](https://github.com/git/git/tree/master/contrib/completion) to your root folder;
 
 **4. \[Optional\] Install the latest Bash version:**
 
@@ -59,8 +59,12 @@ or just copy the `.bash_profile` file from this repo.
 
 **5. \[Optional\] Install a better bash default configuration with [Sensible Bash](https://github.com/mrzool/bash-sensible)**
 
+**6. \[Optional\] Copy `.screenrc` to your root directory to enable Pumped Up Prompt inside bash screen sessions.**
+
+**7. \[Optional\] Copy `.bash_aliases` to your root directory to get some useful aliases from [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh/wiki/Cheatsheet).**
+
 ## Segments
-Segments' color and order are changed in 'Settings' block inside `.pumpt-up-prompt.sh`.
+Segments' color and order are changed in 'Settings' block inside `pumpt-up-prompt.sh`.
 
 Segment | Description
 ------- | -----------
