@@ -6,28 +6,30 @@
 
 Pumped Up Prompt is a set of solutions to improve your shell experience. It contains:
 1. Custom segmented shell prompt;
-2. Font with segment separators and icons*;
+2. Fonts with segment separators and icons*;
 3. Optional improvements.
 
-*Pumped Up Prompt uses the same Unicode places as Powerline Patched fonts (e.g. [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)), so you can use Pumped Up Prompt fonts instead of them if you don't need other functionality.
+*Font separators use the same Unicode places as Powerline Patched fonts (e.g. [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)).
 
 ## Features
 Light 🎈<br/>
 	Pure bash. No hidden engines in the background. Fast even in huge projects.<br/>
     
 Beautiful 🎀<br/>
-	All separators are handcrafted and pixel-perfect. Enjoy the smoothness.<br/>
+	All the separators are handcrafted and pixel-perfect. Enjoy the smoothness.<br/>
     
 Hard to pronounce 🤔<br/>
 	Not really a feature, but... you can use it as a tongue twister!
 
 ## Previews
 
-<img width="682" alt="screenshot 2017-05-29 00 32 18" src="https://cloud.githubusercontent.com/assets/5172360/26532373/8c79ba10-4407-11e7-8aaa-9df86b2600e5.png">
+<p align="center">
+	<img width="842" alt="Solarized Dark preview" src="https://user-images.githubusercontent.com/5172360/32701825-8b195fb2-c7ed-11e7-88c0-ea6ad9f197f8.png">
+</p>
 
 **Terminal**: [iTerm2](https://www.iterm2.com/)<br/>
 **Theme**: Solarized Dark<br/>
-**Font**: Menlo PP12
+**Font**: Menlo PP15
 
 ## Installation
 **1. Prompt:**
