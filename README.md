@@ -46,7 +46,7 @@ or just copy the `.bash_profile` file from this repo.
 
 **3. Git Prompt Plugin:**
 
-Copy `git-prompt.sh` and `git-completion.bash` from [Git Prompt Plugin](https://github.com/git/git/tree/master/contrib/completion) to your root folder;
+Copy `git-prompt.sh` and `git-completion.bash` from [Git Prompt Plugin](https://github.com/git/git/tree/master/contrib/completion) to your home directory;
 
 **4. \[Optional\] Install the latest Bash version:**
 
